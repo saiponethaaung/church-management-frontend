@@ -1,0 +1,52 @@
+{
+  "name": "admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "export $(cat .env | xargs) && next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "next": "catalog:",
+    "@mantine/carousel": "catalog:",
+    "@mantine/charts": "catalog:",
+    "@mantine/code-highlight": "catalog:",
+    "@mantine/core": "catalog:",
+    "@mantine/dates": "catalog:",
+    "@mantine/dropzone": "catalog:",
+    "@mantine/form": "catalog:",
+    "@mantine/hooks": "catalog:",
+    "@mantine/modals": "catalog:",
+    "@mantine/notifications": "catalog:",
+    "@mantine/nprogress": "catalog:",
+    "@mantine/spotlight": "catalog:",
+    "@mantine/tiptap": "catalog:",
+    "@tabler/icons-react": "catalog:",
+    "@tiptap/extension-link": "catalog:",
+    "@tiptap/pm": "catalog:",
+    "@tiptap/react": "catalog:",
+    "@tiptap/starter-kit": "catalog:",
+    "dayjs": "catalog:",
+    "embla-carousel-react": "catalog:",
+    "recharts": "catalog:",
+    "@apollo/client": "catalog:",
+    "graphql": "catalog:"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "tailwindcss": "catalog:",
+    "eslint": "catalog:",
+    "eslint-config-next": "catalog:",
+    "@eslint/eslintrc": "catalog:",
+    "postcss": "catalog:",
+    "postcss-preset-mantine": "catalog:",
+    "postcss-simple-vars": "catalog:"
+  }
+}

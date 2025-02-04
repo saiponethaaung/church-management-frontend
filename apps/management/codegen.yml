@@ -1,0 +1,12 @@
+overwrite: true
+schema: ${NEXT_PUBLIC_GRAPHQL_ENDPOINT}
+documents: "**/*.{gql,graphql}"
+generates:
+  utils/graphql/generated/schema.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"

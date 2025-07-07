@@ -13,7 +13,7 @@ import classes from "./login.module.css";
 import { useEffect, useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 
-export default function LoginForm() {
+export default function RegisterForm() {
   const [domLoaded, setDomLoaded] = useState(false);
   const [processing, setProcessing] = useState(false);
   const loginMutaitionGQL = gql`

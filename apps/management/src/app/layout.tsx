@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { createTheme, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import { ApolloGQLProvider } from "@utils/apollo/apollo.provider";
+import { CookiesProvider } from "next-client-cookies/server";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,9 +34,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ApolloGQLProvider>
-          <MantineProvider theme={theme}>{children}</MantineProvider>
-        </ApolloGQLProvider>
+        <CookiesProvider>
+          <ApolloGQLProvider>
+            <MantineProvider theme={theme}>{children}</MantineProvider>
+          </ApolloGQLProvider>
+        </CookiesProvider>
       </body>
     </html>
   );

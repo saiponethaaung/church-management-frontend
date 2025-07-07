@@ -1,4 +1,10 @@
 "use server";
+import createApolloClient from "@utils/apollo/apollo.client";
+import {
+  ProfileDocument,
+  ProfileQuery,
+  ProfileQueryVariables,
+} from "@utils/graphql/generated/schema";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -12,38 +18,34 @@ export const getBaseUrl = async (headers: Headers) => {
 export const checkSession = async () => {
   const cookie = await cookies();
   const access_token = cookie.get("access_token")?.value;
-  //   const refresh_token = cookie.get("refresh_token")?.value;
 
   if (!access_token) {
-    // if (!refresh_token) {
     return redirect("/login");
-    // } else {
-    //   const headerList = await headers();
-    //   const baseUrl = await getBaseUrl(headerList);
-    //   const response = await fetch(`${baseUrl}/api/auth/refresh`);
-    //   if (!response.ok) {
-    //     return redirect("/login");
-    //   }
-    // }
+  } else {
+    const client = createApolloClient(access_token);
+
+    const data = await client
+      .query<ProfileQuery, ProfileQueryVariables>({
+        query: ProfileDocument,
+      })
+      .catch((error) => {
+        if (error.message === "Unauthorized") {
+          return redirect("/logout");
+        } else {
+          console.error(error.message);
+        }
+      });
+
+    return data;
   }
 };
 
 export const checkGuest = async () => {
   const cookie = await cookies();
   const access_token = cookie.get("access_token")?.value;
-  //   const refresh_token = cookie.get("refresh_token")?.value;
 
   if (access_token) {
-    // if (!refresh_token) {
     return redirect("/");
-    // } else {
-    //   const headerList = await headers();
-    //   const baseUrl = await getBaseUrl(headerList);
-    //   const response = await fetch(`${baseUrl}/api/auth/refresh`);
-    //   if (!response.ok) {
-    //     return redirect("/login");
-    //   }
-    // }
   }
 };
 

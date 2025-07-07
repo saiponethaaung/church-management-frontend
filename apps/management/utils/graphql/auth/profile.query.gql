@@ -1,0 +1,12 @@
+query Profile {
+  getProfile {
+    id
+    name
+    email
+    verified
+    createdAt
+    createdBy
+    updatedAt
+    updatedBy
+  }
+}

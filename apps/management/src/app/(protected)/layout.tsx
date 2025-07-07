@@ -8,6 +8,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   await checkSession();
+
   return (
     <div>
       <div>{children}</div>

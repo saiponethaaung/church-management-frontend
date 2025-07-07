@@ -1,0 +1,12 @@
+mutation CreateChurch($name: String!) {
+  createChurch(createChurch: { name: $name }) {
+    countryId
+    id
+    logo
+    name
+    verified
+    address {
+      street
+    }
+  }
+}

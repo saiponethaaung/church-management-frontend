@@ -17,8 +17,30 @@ import {
 } from "@utils/graphql/generated/schema";
 import { setCookie } from "@utils/auth/auth";
 import { redirect } from "next/navigation";
+import { useForm } from "@mantine/form";
 
 export default function LoginForm() {
+  const form = useForm({
+    mode: "uncontrolled",
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validate: {
+      email: (value) => {
+        if (value.trim() === "") {
+          return "Email is required";
+        }
+        return null;
+      },
+      password: (value) => {
+        if (value.trim() === "") {
+          return "Password is required";
+        }
+        return null;
+      },
+    },
+  });
   const [domLoaded, setDomLoaded] = useState(false);
   const [login, { data, loading }] = useLoginMutation();
 
@@ -37,6 +59,10 @@ export default function LoginForm() {
     }
   }, [data]);
 
+  const loginCallback = async (data: { email: string; password: string }) => {
+    login({ variables: { email: data.email, password: data.password } });
+  };
+
   if (!domLoaded) {
     return null;
   }
@@ -49,42 +75,25 @@ export default function LoginForm() {
           <br />
           Management Portal!
         </Title>
-
-        <TextInput
-          label="Email address"
-          placeholder="hello@gmail.com"
-          size="md"
-        />
-        <PasswordInput
-          label="Password"
-          placeholder="Your password"
-          mt="md"
-          size="md"
-        />
-        <Checkbox label="Keep me logged in" mt="xl" size="md" />
-        <Button
-          fullWidth
-          mt="xl"
-          size="md"
-          type="button"
-          //   onClick={login}
-          onClick={() => {
-            alert(
-              "mutation should be fired" +
-                process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT
-            );
-            login({
-              variables: {
-                email: "saiponethaaung@gmail.com",
-                password: "sbu9Rf5W@",
-              },
-            });
-          }}
-          disabled={loading}
-        >
-          Login
-        </Button>
-
+        <form onSubmit={form.onSubmit(loginCallback)}>
+          <TextInput
+            label="Email address"
+            placeholder="hello@gmail.com"
+            size="md"
+            {...form.getInputProps("email")}
+          />
+          <PasswordInput
+            label="Password"
+            placeholder="Your password"
+            mt="md"
+            size="md"
+            {...form.getInputProps("password")}
+          />
+          <Checkbox label="Keep me logged in" mt="xl" size="md" />
+          <Button fullWidth mt="xl" size="md" type="submit" disabled={loading}>
+            Login
+          </Button>
+        </form>
         <Text ta="center" mt="md">
           Don&apos;t have an account?{" "}
           <Anchor<"a"> href="/register" fw={700}>

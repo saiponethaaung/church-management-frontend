@@ -1,7 +1,7 @@
 import { checkGuest } from "@utils/auth/auth";
-import LoginForm from "./loginForm";
+import RegisterForm from "./registerForm";
 
-export default async function loginPage() {
+export default async function registerPage() {
   await checkGuest();
-  return <LoginForm />;
+  return <RegisterForm />;
 }

@@ -1,0 +1,20 @@
+query GetChurches {
+  getChurchs {
+    data {
+      countryId
+      id
+      logo
+      name
+      verified
+      address {
+        street
+      }
+    }
+    pagination {
+      currentPage
+      limit
+      totalCount
+      totalPage
+    }
+  }
+}

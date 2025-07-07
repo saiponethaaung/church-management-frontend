@@ -1,7 +1,6 @@
-import { ChurchNavbar } from "./nav";
-import styles from "./layout.module.css";
-
-export const dynamic = "force-dynamic";
+import { AppNavbar } from "@app/components/layout/nav/nav";
+import styles from "./layout.module.scss";
+import { Header } from "@app/components/layout/header/header";
 
 export default async function RootLayout({
   children,
@@ -10,10 +9,12 @@ export default async function RootLayout({
 }) {
   return (
     <div className={styles.rootCon}>
-      <ChurchNavbar />
-      <div>
-        <header>header</header>
-        <main>{children}</main>
+      <AppNavbar />
+      <div className={styles.content}>
+        <Header />
+        <div className={styles.contentCon}>
+          <main>{children}</main>
+        </div>
       </div>
     </div>
   );
